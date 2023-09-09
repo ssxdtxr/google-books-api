@@ -22,10 +22,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "paths": {
-      "@/*": ["src/*"],
-      "@components/*": ["src/components/*"],
-      "@assets/*": ["src/assets/*"],
-      "@pages/*": ["src/pages/*"]
+      "@/*": ["./src/*"]
     }
   },
   "include": [
