@@ -1,4 +1,4 @@
-import React, {FC, forwardRef, useContext} from 'react';
+import  {FC, forwardRef, useContext} from 'react';
 import styles from "./Card.module.scss"
 import {IBook} from "@/types/IInfoBooks.ts";
 import {ModalContext} from "@/context/ModalContext.ts";
