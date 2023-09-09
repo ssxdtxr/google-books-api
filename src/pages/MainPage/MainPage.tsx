@@ -1,7 +1,7 @@
 import Container from "@/components/Container/Container.tsx";
 import styles from "./MainPage.module.scss"
 import {Input} from "@/components/UI/Input/Input.tsx";
-import {ChangeEvent, Fragment, useState} from "react";
+import {ChangeEvent, Fragment, useState, KeyboardEvent} from "react";
 import {IOptions, Select} from "@/components/UI/Select/Select.tsx";
 import {useMutation} from "react-query";
 import {BooksService} from "@/services/Books/books.service.ts";
