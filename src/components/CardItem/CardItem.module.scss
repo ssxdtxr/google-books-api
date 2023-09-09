@@ -1,0 +1,27 @@
+@import "../../assets/styles/mixins";
+.wrapper {
+  display: flex;
+  gap: 20px;
+  @include smallMobileMedia {
+    flex-direction: column-reverse;
+  }
+  .imgSection {
+    display: flex;
+    padding: 20px;
+    background-color: #dfdedf;
+    align-items: center;
+    @include smallMobileMedia {
+      display: none;
+    }
+  }
+  .info {
+    display: flex;
+    flex-direction: column;
+
+    gap: 7px;
+    p {
+      padding: 10px;
+      box-shadow: rgba(99, 99, 99, 0.2) 0px 2px 8px 0px;;
+    }
+  }
+}

@@ -1,0 +1,45 @@
+@import "../../assets/styles/mixins";
+.back {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: rgba(0, 0, 0, .4);
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+
+  .modal {
+    background-color: #fff;
+    width: 800px;
+    box-shadow: 0 0 25px rgba(0, 0, 0, .144);
+    border-radius: 10px;
+    padding: 10px;
+    color: #000;
+    @include smallMobileMedia {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      height: 100vh;
+    }
+    .close {
+      display: flex;
+      justify-content: end;
+      padding: 10px;
+      .closeBtn {
+        cursor: pointer;
+      }
+    }
+    .body {
+      @include smallMobileMedia {
+        height: 100vh;
+      }
+    }
+  }
+}
+.isOpenModal {
+  overflow-y: hidden;
+}
