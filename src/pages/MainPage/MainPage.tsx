@@ -1,18 +1,19 @@
 import Container from "@/components/Container/Container.tsx";
 import styles from "./MainPage.module.scss"
 import {Input} from "@components/UI/Input/Input.tsx";
-import {ChangeEvent, Fragment, useEffect, useRef, useState} from "react";
+import {ChangeEvent, Fragment,  useState} from "react";
 import {IOptions, Select} from "@components/UI/Select/Select.tsx";
-import {useMutation, useQuery} from "react-query";
+import {useMutation} from "react-query";
 import {BooksService} from "@/services/Books/books.service.ts";
-import {MCard} from "@components/Card/Card.tsx";
 import {ReactComponent as Search} from "@/assets/img/search.svg"
 import {useTypedSelectorHook} from "@/hooks/useTypedSelectorHook.ts";
 import {useActions} from "@/hooks/useActions.ts";
-import {IBook, IInfoBooks} from "@/types/IInfoBooks.ts";
+import {IInfoBooks} from "@/types/IInfoBooks.ts";
 import {useSnackbar} from "notistack";
 import {AxiosError} from "axios";
 import Skeleton from "@components/Skeleton/Skeleton.tsx";
+import {CardList} from "@/components/CardList/CardList.tsx";
+import {Button} from "@/components/UI/Button/Button.tsx";
 
 const categoryOptions = [
     {value: 'all', label: 'All'},
@@ -24,17 +25,7 @@ const sortOptions = [
     {value: 'newest', label: 'Newest '}
 ]
 
-const bookVariants = {
-    hidden: {
-        opacity: 0,
-    },
-    visible: (custom: number) => ({
-        opacity: 1,
-        transition: {
-            delay: custom * .01,
-        },
-    }),
-};
+
 export const MainPage = () => {
     const [inputValue, setInputValue] = useState<string>('')
     const [currentItems, setCurrentItems] = useState<number>(1)
@@ -164,26 +155,12 @@ export const MainPage = () => {
                                                         </Fragment>
                                                     )
                                                     :
-                                                    books.map((book, index) =>
-                                                        <MCard
-                                                            key={index}
-                                                            book={book}
-                                                            variants={bookVariants}
-                                                            initial={'hidden'}
-                                                            animate={'visible'}
-                                                            custom={index + 1}
-                                                        />
-                                                    )
+                                                    <CardList books={books}/>
                                             }
                                         </div>
                                         {
                                             totalCount - (currentItems + 1) * 30 > 0 ?
-                                                <button
-                                                    className={styles.loadMore}
-                                                    onClick={handleLoadMore}
-                                                >
-                                                    load more
-                                                </button>
+                                                <Button onClick={handleLoadMore} placeholder='Load More'/>
                                                 :
                                                 ''
                                         }

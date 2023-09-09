@@ -122,26 +122,7 @@
           justify-content: center;
 
         }
-        .loadMore {
-          margin: 20px 0;
-          display: flex;
-          justify-content: center;
-          align-self: center;
-          background-color: #1c78f0;
-          color: #fff;
-          font-weight: 800;
-          font-size: 20px;
-          border-radius: 7px;
-          width: 200px;
-          padding: 20px;
-          cursor: pointer;
-          &:hover {
-            opacity: .7;
-          }
-          &:active {
-            opacity: .9;
-          }
-        }
+
       }
     }
   }
