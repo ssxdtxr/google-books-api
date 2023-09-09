@@ -158,12 +158,10 @@ export const MainPage = () => {
                                             }
                                         </div>
                                         {
-                                            totalCount - (currentItems + 1) * 30 > 0 ?
-                                                <Button onClick={handleLoadMore}>
-                                                    Load More
-                                                </Button>
-                                                :
-                                                ''
+                                            (totalCount - (currentItems + 1) * 30 > 0 && !isLoading) &&
+                                            <Button onClick={handleLoadMore}>
+                                                Load More
+                                            </Button>
                                         }
 
                                     </>
