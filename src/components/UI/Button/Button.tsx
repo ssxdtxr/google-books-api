@@ -1,18 +1,18 @@
-import {FC} from 'react';
+import {FC, ReactNode} from 'react';
 import styles from "./Button.module.scss";
 
 interface IButton {
     onClick: () => void
-    placeholder: string
+    children: ReactNode
 }
 
-export const Button: FC<IButton> = ({onClick, placeholder}) => {
+export const Button: FC<IButton> = ({onClick, children}) => {
     return (
         <button
             className={styles.loadMore}
             onClick={onClick}
         >
-            {placeholder}
+            {children}
         </button>
     );
 };
