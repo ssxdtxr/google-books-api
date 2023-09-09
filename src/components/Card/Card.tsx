@@ -1,15 +1,15 @@
-import  {FC, forwardRef, useContext} from 'react';
+import {FC, ForwardedRef, forwardRef, useContext} from 'react';
 import styles from "./Card.module.scss"
 import {IBook} from "@/types/IInfoBooks.ts";
 import {ModalContext} from "@/context/ModalContext.ts";
-import {CardItem} from "@components/CardItem/CardItem.tsx";
+import {CardItem} from "@/components/CardItem/CardItem.tsx";
 import {motion} from "framer-motion";
 
 export interface ICard {
     book: IBook
 }
 
-export const Card: FC<ICard> = forwardRef(({book}, ref) => {
+export const Card: FC<ICard> = forwardRef(({book}, ref: ForwardedRef<HTMLDivElement>) => {
     const {openModal} = useContext(ModalContext)
     const openUserModal = () => {
         openModal(<CardItem book={book}/>)

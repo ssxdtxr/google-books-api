@@ -1,5 +1,5 @@
-import React, {FC} from 'react';
-import {ICard} from "@components/Card/Card.tsx";
+import {FC} from 'react';
+import {ICard} from "@/components/Card/Card.tsx";
 import styles from "./CardItem.module.scss"
 
 export const CardItem: FC<ICard> = ({book}) => {
