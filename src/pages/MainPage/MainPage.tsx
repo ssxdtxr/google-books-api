@@ -1,17 +1,16 @@
 import Container from "@/components/Container/Container.tsx";
 import styles from "./MainPage.module.scss"
-import {Input} from "@components/UI/Input/Input.tsx";
-import {ChangeEvent, Fragment,  useState} from "react";
-import {IOptions, Select} from "@components/UI/Select/Select.tsx";
+import {Input} from "@/components/UI/Input/Input.tsx";
+import {ChangeEvent, Fragment, useState} from "react";
+import {IOptions, Select} from "@/components/UI/Select/Select.tsx";
 import {useMutation} from "react-query";
 import {BooksService} from "@/services/Books/books.service.ts";
 import {ReactComponent as Search} from "@/assets/img/search.svg"
 import {useTypedSelectorHook} from "@/hooks/useTypedSelectorHook.ts";
 import {useActions} from "@/hooks/useActions.ts";
-import {IInfoBooks} from "@/types/IInfoBooks.ts";
 import {useSnackbar} from "notistack";
 import {AxiosError} from "axios";
-import Skeleton from "@components/Skeleton/Skeleton.tsx";
+import Skeleton from "@/components/Skeleton/Skeleton.tsx";
 import {CardList} from "@/components/CardList/CardList.tsx";
 import {Button} from "@/components/UI/Button/Button.tsx";
 
@@ -35,25 +34,25 @@ export const MainPage = () => {
     const {totalCount, books} = useTypedSelectorHook(state => state.books)
     const {updateTotalCount, updateBooksItems, getBooksItems} = useActions()
 
-    const {mutateAsync, isLoading} = useMutation<IInfoBooks>(['books'], () => BooksService.getBooks({
+    const {mutateAsync, isLoading} = useMutation(['books'], () => BooksService.getBooks({
         q: inputValue,
         orderBy: selectedSort.value,
         printType: selectedCategory.value,
         startIndex: 0,
         maxResults: 30
     }), {
-        onSuccess: (data) => {
+        onSuccess: async (data) => {
             updateTotalCount(data.data.totalItems)
             getBooksItems(data.data.items)
             if (!data.data.totalItems)
                 return enqueueSnackbar('Unfortunately nothing was found.', {variant: "error"})
         },
-        onError: (error: AxiosError<{ error: string }>) => {
-            enqueueSnackbar(error.response.data.error.message, {variant: "error"})
+        onError: (error: AxiosError<{ error: {message: string} }>) => {
+            enqueueSnackbar(error.response?.data.error.message, {variant: "error"})
         }
     })
 
-    const {mutateAsync: mutateUpdateBooks} = useMutation<IInfoBooks>(['books'], () => BooksService.getBooks({
+    const {mutateAsync: mutateUpdateBooks} = useMutation(['books'], () => BooksService.getBooks({
             q: inputValue,
             orderBy: selectedSort.value,
             printType: selectedCategory.value,
@@ -70,7 +69,7 @@ export const MainPage = () => {
         setInputValue(e.target.value)
     }
 
-    const handleKeyPress = async (e: KeyboardEvent<HTMLInputElement>) => {
+    const handleKeyPress = async (e: KeyboardEvent) => {
         if (e.key === 'Enter') {
             await mutateAsync()
         }
@@ -119,7 +118,7 @@ export const MainPage = () => {
                                         <Select
                                             options={categoryOptions}
                                             value={selectedCategory}
-                                            onChange={option => handleOptionCategory(option)}
+                                            onChange={(option: IOptions | undefined) => handleOptionCategory(!option ? {} as IOptions : option)}
                                             placeholder='Выберите категорию...'
                                         />
                                     </div>
@@ -128,7 +127,7 @@ export const MainPage = () => {
                                         <Select
                                             options={sortOptions}
                                             value={selectedSort}
-                                            onChange={option => handleOptionSort(option)}
+                                            onChange={(option: IOptions | undefined) => handleOptionSort(!option ? {} as IOptions : option)}
                                             placeholder='Выберите категорию...'
                                         />
                                     </div>

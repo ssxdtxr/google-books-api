@@ -1,5 +1,5 @@
 
-import { FC, useEffect, useState, MouseEvent} from "react";
+import { FC, useEffect, useState} from "react";
 import s from './Select.module.scss'
 import cn from "classnames"
 export interface IOptions {
