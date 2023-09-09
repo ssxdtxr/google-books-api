@@ -1,4 +1,4 @@
-import {ChangeEvent, FC} from "react";
+import {ChangeEvent, FC, KeyboardEvent } from "react";
 import s from "./Input.module.scss"
 
 interface IInput {
