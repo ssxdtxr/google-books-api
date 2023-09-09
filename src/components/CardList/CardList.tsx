@@ -1,5 +1,5 @@
-import React, {FC} from 'react';
-import { MCard} from "@/components/Card/Card.tsx";
+import {FC} from 'react';
+import {MCard} from "@/components/Card/Card.tsx";
 import {IBook} from "@/types/IInfoBooks.ts";
 
 interface ICardList {
