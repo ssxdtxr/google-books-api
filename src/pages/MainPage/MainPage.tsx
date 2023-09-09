@@ -47,7 +47,7 @@ export const MainPage = () => {
             if (!data.data.totalItems)
                 return enqueueSnackbar('Unfortunately nothing was found.', {variant: "error"})
         },
-        onError: (error: AxiosError<{ error: {message: string} }>) => {
+        onError: (error: AxiosError<{ error: { message: string } }>) => {
             enqueueSnackbar(error.response?.data.error.message, {variant: "error"})
         }
     })
@@ -159,7 +159,9 @@ export const MainPage = () => {
                                         </div>
                                         {
                                             totalCount - (currentItems + 1) * 30 > 0 ?
-                                                <Button onClick={handleLoadMore} placeholder='Load More'/>
+                                                <Button onClick={handleLoadMore}>
+                                                    Load More
+                                                </Button>
                                                 :
                                                 ''
                                         }
